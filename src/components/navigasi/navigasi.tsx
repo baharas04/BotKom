@@ -48,7 +48,7 @@ const Navbar = () => {
           <Link href="/materi">
             <span className="text-gray-300 hover:text-blue-500 dark:text-white dark:hover:text-blue-500 py-2 px-3">Materi</span>
           </Link>
-          <Link href="/about">
+          <Link href="/tentang">
             <span className="text-gray-300 hover:text-blue-500 dark:text-white dark:hover:text-blue-500 py-2 px-3">About</span>
           </Link>
           <Link href="/petunjuk">
@@ -101,7 +101,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/about">
+            <Link href="/tentang">
               <span className="block py-2 px-3 text-gray-300 rounded hover:bg-gray-700">About</span>
             </Link>
           </li>

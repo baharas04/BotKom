@@ -2,19 +2,10 @@ import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 const materiData = [
-  {
-    id: 'bab-1',
-    title: 'Bab 1: Pengenalan Sistem Komputer',
-    description: 'Pahami dasar-dasar sistem komputer.',
-    pdfLink: '/files/materi/bab_1.pdf' // Link file PDF
-  },
-  {
-    id: 'bab-2',
-    title: 'Bab 2: Perangkat Keras',
-    description: 'Pelajari komponen-komponen perangkat keras komputer.',
-    pdfLink: '/files/materi/bab-2.pdf' // Link file PDF
-  },
-  // Tambahkan materi lainnya jika diperlukan
+  { id: 'bab-1', title: 'Bab 1: Pengenalan Sistem Komputer', description: 'Pahami dasar-dasar sistem komputer.', pdfLink: '...', downloadLink: '...' },
+  { id: 'bab-2', title: 'Bab 2: Perangkat Keras', description: 'Pelajari komponen-komponen perangkat keras komputer.', pdfLink: '...', downloadLink: '...' },
+  { id: 'bab-3', title: 'Bab 3: Sistem Operasi', description: 'Pahami fungsi dan jenis-jenis sistem operasi.', pdfLink: '...', downloadLink: '...' },
+  // More data here...
 ];
 
 type Materi = {
@@ -22,13 +13,17 @@ type Materi = {
   title: string;
   description: string;
   pdfLink: string;
+  downloadLink: string;
 };
 
-// Halaman ini menggunakan parameter dinamis `params`
 const MateriDetailPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
-  // Mencari materi berdasarkan `id`
+  // Ensure that `id` is available before proceeding
+  if (!id) {
+    return <div>Materi tidak ditemukan</div>;
+  }
+
   const materi = materiData.find((materi) => materi.id === id);
 
   if (!materi) {
@@ -41,18 +36,26 @@ const MateriDetailPage = async ({ params }: { params: { id: string } }) => {
         <CardTitle>{materi.title}</CardTitle>
         <CardDescription>{materi.description}</CardDescription>
 
-        {/* Menampilkan PDF dengan iframe */}
         <div className="mt-4" style={{ width: '100%', height: '600px' }}>
           <iframe
-            src={materi.pdfLink} // Link ke file PDF
-            width="100%" // Memastikan lebar penuh
-            height="600px" // Menentukan tinggi untuk tampilan PDF
+            src={materi.pdfLink} // Link embed Google Slides
+            width="100%"
+            height="600px"
             frameBorder="0"
             title={materi.title}
           />
         </div>
 
-        {/* Tombol untuk kembali ke daftar materi */}
+        <div className="mt-4">
+          <a
+            href={materi.downloadLink}
+            download
+            className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-center inline-block"
+          >
+            Download Materi (PPTX)
+          </a>
+        </div>
+
         <Link href="/materi">
           <button className="mt-4 w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Kembali ke Daftar Materi</button>
         </Link>

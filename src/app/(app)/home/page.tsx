@@ -1,4 +1,4 @@
-import { CarouselComponent } from "@/components/carousel/carousel"; // Import CarouselComponent
+import { CarouselComponent } from "@/components/carousel/carousel"; 
 import React from "react";
 import { FaBook, FaQuestionCircle, FaRobot } from "react-icons/fa";
 import { Avatar } from "@/components/ui/avatar";
@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/card";
 
 const Home = () => {
-  // Define carousel data with images, titles, and descriptions
   const carouselData = [
     {
       imageUrl: "/images/pict1.jpg",
@@ -45,7 +44,7 @@ const Home = () => {
   return (
     <main className="flex flex-col items-center">
 
-      <div className="w-full px-4 bg-gray-900 py-6">
+      <div className="w-full px-4 bg-gray-900 py-6 mt-2 sm:mt-2">
         <CarouselComponent items={carouselData} autoplayDelay={3000} />
       </div>
 
@@ -113,11 +112,6 @@ const Home = () => {
           </Card>
         </div>
       </div>
-      
-
-      <div className="mt-6 border-t bg-gray-900 text-white w-screen border-gray-700 pt-4 text-center text-sm">
-      <span>© 2023 YourSite™. All Rights Reserved.</span>
-    </div>
     </main>
   );
 };
