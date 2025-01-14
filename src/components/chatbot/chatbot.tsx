@@ -1,71 +1,74 @@
-"use client";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 
-import React, { useState } from "react";
-import axios from "axios";
+// Data materi yang ada
+const materiData = [
+  { id: 'bab-1', title: 'Bab 1: Pengenalan Sistem Komputer', description: 'Pahami dasar-dasar sistem komputer.', pdfLink: '...', downloadLink: '...' },
+  { id: 'bab-2', title: 'Bab 2: Perangkat Keras', description: 'Pelajari komponen-komponen perangkat keras komputer.', pdfLink: '...', downloadLink: '...' },
+  { id: 'bab-3', title: 'Bab 3: Sistem Operasi', description: 'Pahami fungsi dan jenis-jenis sistem operasi.', pdfLink: '...', downloadLink: '...' },
+  // More data here...
+];
 
-type Message = {
-  sender: "user" | "bot"; 
-  text: string;
+// Tipe Materi
+type Materi = {
+  id: string;
+  title: string;
+  description: string;
+  pdfLink: string;
+  downloadLink: string;
 };
 
-const App: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState(""); 
-
-  const handleSendMessage = async () => {
-    if (input.trim()) {
-      const newMessages: Message[] = [...messages, { sender: "user", text: input }];
-      setMessages(newMessages); 
-      setInput(""); 
-      try {
-        const response = await axios.post("http://localhost:8000/api/message", {
-          message: input,
-        });
-
-        const botMessage = response.data.response; // Pesan dari bot
-        // Menambahkan pesan dari bot ke state
-        setMessages([...newMessages, { sender: "bot", text: botMessage }]);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    }
+// Tipe untuk parameter yang diterima (params)
+type MateriDetailPageProps = {
+  params: {
+    id: string; // Parameter yang diterima untuk ID materi
   };
+};
+
+// MateriDetailPage yang menerima props dengan tipe MateriDetailPageProps
+export default function MateriDetailPage({ params }: MateriDetailPageProps) {
+  const { id } = params;
+
+  // Pastikan materi ditemukan berdasarkan ID
+  const materi = materiData.find((materi) => materi.id === id);
+
+  // Menangani kasus jika materi tidak ditemukan
+  if (!materi) {
+    return <div>Materi tidak ditemukan</div>;
+  }
 
   return (
-    <div className="flex flex-col justify-end p-4 h-screen bg-gray-100">
-      {/* Pesan Chat */}
-      <div className="flex-1 overflow-y-auto space-y-4 p-2 bg-white border rounded-lg shadow-lg">
-        {messages.map((msg, index) => (
-          <div key={index} className={`flex ${msg.sender === "bot" ? "justify-start" : "justify-end"}`}>
-            <div
-              className={`p-2 rounded-lg max-w-xs ${
-                msg.sender === "bot" ? "bg-gray-300" : "bg-blue-500 text-white"
-              }`}
-            >
-              {msg.text}
-            </div>
-          </div>
-        ))}
-      </div>
+    <main className="max-w-screen-xl mx-auto px-4 py-8 pt-10">
+      <Card className="p-4">
+        <CardTitle>{materi.title}</CardTitle>
+        <CardDescription>{materi.description}</CardDescription>
 
-      {/* Input untuk menulis pesan */}
-      <div className="mt-4 flex items-center">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)} // Mengupdate state input saat pengguna mengetik
-          placeholder="Type a message"
-          className="w-full p-2 rounded-lg border border-gray-300"
-        />
-        <button
-          onClick={handleSendMessage} // Mengirim pesan ketika tombol di-klik
-          className="ml-2 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-        >
-          Send
-        </button>
-      </div>
-    </div>
+        <div className="mt-4" style={{ width: '100%', height: '600px' }}>
+          <iframe
+            src={materi.pdfLink} // Link embed Google Slides atau materi terkait
+            width="100%"
+            height="600px"
+            frameBorder="0"
+            title={materi.title}
+          />
+        </div>
+
+        <div className="mt-4">
+          <a
+            href={materi.downloadLink}
+            download
+            className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-center inline-block"
+          >
+            Download Materi (PPTX)
+          </a>
+        </div>
+
+        <Link href="/materi">
+          <button className="mt-4 w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            Kembali ke Daftar Materi
+          </button>
+        </Link>
+      </Card>
+    </main>
   );
-};
-
-export default App;
+}

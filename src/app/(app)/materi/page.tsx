@@ -5,16 +5,16 @@ import React from 'react';
 
 const MateriPage = () => {
   const materiList = [
-    { id: 'bab-1', title: 'Bab 1: Pengenalan Sistem Komputer', description: 'Pahami dasar-dasar sistem komputer.' },
-    { id: 'bab-2', title: 'Bab 2: Perangkat Keras', description: 'Pelajari komponen-komponen perangkat keras komputer.' },
-    { id: 'bab-3', title: 'Bab 3: Perangkat Lunak', description: 'Mengenal berbagai jenis perangkat lunak.' },
-    { id: 'bab-4', title: 'Bab 4: Sistem Operasi', description: 'Pahami peran dan jenis sistem operasi.' },
-    { id: 'bab-5', title: 'Bab 5: Jaringan Komputer', description: 'Belajar tentang jaringan komputer dan protokolnya.' },
-    { id: 'bab-6', title: 'Bab 6: Pemrograman', description: 'Mengenal dunia pemrograman dan bahasa pemrograman populer.' },
-    { id: 'bab-7', title: 'Bab 7: Basis Data', description: 'Pahami tentang sistem basis data dan manajemennya.' },
-    { id: 'bab-8', title: 'Bab 8: Keamanan Komputer', description: 'Menjaga keamanan data dan perangkat komputer.' },
-    { id: 'bab-9', title: 'Bab 9: Teknologi AI', description: 'Mengenal perkembangan teknologi Kecerdasan Buatan.' },
-    { id: 'bab-10', title: 'Bab 10: Cloud Computing', description: 'Belajar tentang komputasi awan dan aplikasinya.' },
+    { id: '1', title: 'Bab 1: Pengenalan Sistem Komputer', description: 'Pahami dasar-dasar sistem komputer.' },
+    { id: '2', title: 'Bab 2: Perangkat Keras', description: 'Pelajari komponen-komponen perangkat keras komputer.' },
+    { id: '3', title: 'Bab 3: Perangkat Lunak', description: 'Mengenal berbagai jenis perangkat lunak.' },
+    { id: '4', title: 'Bab 4: Sistem Operasi', description: 'Pahami peran dan jenis sistem operasi.' },
+    { id: '5', title: 'Bab 5: Jaringan Komputer', description: 'Belajar tentang jaringan komputer dan protokolnya.' },
+    { id: '6', title: 'Bab 6: Pemrograman', description: 'Mengenal dunia pemrograman dan bahasa pemrograman populer.' },
+    { id: '7', title: 'Bab 7: Basis Data', description: 'Pahami tentang sistem basis data dan manajemennya.' },
+    { id: '8', title: 'Bab 8: Keamanan Komputer', description: 'Menjaga keamanan data dan perangkat komputer.' },
+    { id: '9', title: 'Bab 9: Teknologi AI', description: 'Mengenal perkembangan teknologi Kecerdasan Buatan.' },
+    { id: '10', title: 'Bab 10: Cloud Computing', description: 'Belajar tentang komputasi awan dan aplikasinya.' },
   ];
 
   return (
@@ -25,7 +25,7 @@ const MateriPage = () => {
           <Card key={index} className="p-4">
             <CardTitle>{materi.title}</CardTitle>
             <CardDescription>{materi.description}</CardDescription>
-            <Link href={`/materi/${materi.id}`}>
+            <Link href={`/materi/bab/${materi.id}`}>
               <Button className="mt-4 w-full">Baca Selengkapnya</Button>
             </Link>
           </Card>
